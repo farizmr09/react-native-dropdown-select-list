@@ -1,7 +1,6 @@
-|                          | |  |   |   |
-| --------------------------------------- | -------- | ---------- |---------- |---------- |
-| <a href="https://www.npmjs.com/package/react-native-dropdown-select-list">![NPM VERSION](https://img.shields.io/npm/v/react-native-dropdown-select-list?style=for-the-badge)</a> | <a href="https://www.npmjs.com/package/react-native-dropdown-select-list">![NPM WEEKLY DOWNLOADS](https://img.shields.io/npm/dw/react-native-dropdown-select-list?color=%232CA215&label=WEEKLY%20DOWNLOADS&style=for-the-badge)</a> | <a href="https://github.com/danish1658/react-native-dropdown-select-list/stargazers">![GITHUB STAR](https://img.shields.io/github/stars/danish1658/react-native-dropdown-select-list?label=Give%20Us%20A%20Star&style=for-the-badge)</a> | <a href="https://www.youtube.com/channel/UCEbbpzmnbRiNVhJ3ElABbMQ">![YOUTUBE VIEWS](https://img.shields.io/youtube/channel/views/UCEbbpzmnbRiNVhJ3ElABbMQ?label=YOUTUBE%20VIEWS&style=for-the-badge)</a> | <a href="https://www.npmjs.com/package/react-native-dropdown-select-list">![NPM LIFETIME DOWNLOADS](https://img.shields.io/npm/dt/react-native-dropdown-select-list?color=%232CA215&style=for-the-badge)</a>
-
+<br />
+<h3>This is a fork from <b>React Native Dropdown Select List</b> : <a href="https://www.npmjs.com/package/react-native-dropdown-select-list">https://www.npmjs.com/package/react-native-dropdown-select-list</a></h3>
+Fixed Certain Bugs & Enchancing certain features needed therefore this fork and seperate package is made. 
 <br>
 <h1 align="center">
   ⭐ React Native Dropdown Select List </h1>
@@ -254,22 +253,5 @@ const App = () => {
 | badgeStyles| Object| Additional styles for badges of selected values
 | badgeTextStyles| Object| Additional styles for Text of badges of selected values
 | labelStyles| Object| Additional styles for label of multiple select list
-
-<br>
-
-
-# ▶️ Watch Video
-
-[![Watch the video](https://i.imgur.com/K8Lt2h4.png)](https://www.youtube.com/watch?v=J9raEY-1KPQ&t=499s)
-
-<br>
-
-# 💲 Would you like to support me?
-
-If you would like me come up with similar packages, buy me a cup of coffee to boost my energy.
-<br><br>
-[![Paypal](https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png)](https://paypal.me/danishamindar)
-<br><br>
-For Live `Demo` [(Expo Snack)](https://snack.expo.dev/@danish1658/react-native-dropdown-select-list)
 
 <br>
