@@ -4,9 +4,9 @@ Fixed Certain Bugs & Enchancing certain features needed therefore this fork and 
 
 What's Fixed & Enchanced in this package :
 
-  i. Fixed Default option in MultiSelect
-  ii. Added checkicon option as props ( checkicon props ) to change default color or image.
-  iii. Added props ( labelHeadingColor ) to change default color of text selected.
+  i. Fixed Default option in MultiSelect <br>
+  ii. Added checkicon option as props ( checkicon props ) to change default color or image. <br>
+  iii. Added props ( labelHeadingColor ) to change default color of text selected. <br>
 
 defaultOption={[]} i.e array of selected value instead of key value pair.
 
