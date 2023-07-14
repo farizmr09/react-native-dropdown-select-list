@@ -29,6 +29,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
         searchicon = false,
         arrowicon = false,
         closeicon = false,
+        checkicon = false,
         search = true,
         searchPlaceholder = "search",
         onSelect = () => {},
@@ -43,7 +44,8 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
         checkBoxStyles,
         save = 'key',
         dropdownShown = false,
-        defaultOption
+        defaultOption,
+        labelHeadingColor = 'initial'
     }) => {
 
     const oldOption = React.useRef(null)
@@ -224,14 +226,15 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                                         {
                                                             (selectedval?.includes(value))
                                                             ?
-                                                                
+                                                                (!checkicon) 
+                                                                ?
                                                                 <Image 
                                                                     key={index}
                                                                     source={require('../assets/images/check.png')}
                                                                     resizeMode='contain'
                                                                     style={[{width:8,height:8,paddingLeft:7}]}
                                                                 />
-                                                
+                                                                : checkicon
                                                             :
                                                             null
 
@@ -294,14 +297,15 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                                         {
                                                             (selectedval?.includes(value))
                                                             ?
-                                                                
+                                                                (!checkicon) 
+                                                                ?
                                                                 <Image 
                                                                     key={index}
                                                                     source={require('../assets/images/check.png')}
                                                                     resizeMode='contain'
                                                                     style={{width:8,height:8,paddingLeft:7}}
                                                                 />
-                                                
+                                                                : checkicon
                                                             :
                                                             null
 
@@ -337,7 +341,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                     ?
                                         <Pressable>
                                             <View style={{flexDirection:'row', justifyContent:'space-between',alignItems:'center',paddingLeft:20}}>
-                                                <Text style={{marginRight:20,fontWeight:'600',fontFamily}}>Selected</Text>
+                                                <Text style={{marginRight:20,fontWeight:'600',fontFamily, color: labelHeadingColor }}>Selected</Text>
                                                 <View style={{height: 1, flex: 1, backgroundColor: 'gray'}} />
                                             </View>
                                             <View style={{flexDirection:'row',paddingHorizontal:20,marginBottom:20,flexWrap:'wrap'}}>
