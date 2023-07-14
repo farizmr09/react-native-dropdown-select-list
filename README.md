@@ -1,6 +1,15 @@
 <br />
 <h3>This is a fork from <b>React Native Dropdown Select List</b> : <a href="https://www.npmjs.com/package/react-native-dropdown-select-list">https://www.npmjs.com/package/react-native-dropdown-select-list</a></h3>
-Fixed Certain Bugs & Enchancing certain features needed therefore this fork and seperate package is made. 
+Fixed Certain Bugs & Enchancing certain features needed therefore this fork and seperate package is made.
+
+What's Fixed & Enchanced in this package :
+
+  i. Fixed Default option in MultiSelect
+  ii. Added checkicon option as props ( checkicon props ) to change default color or image.
+  iii. Added props ( labelHeadingColor ) to change default color of text selected.
+
+defaultOption={[]} i.e array of selected value instead of key value pair.
+
 <br>
 <h1 align="center">
   ⭐ React Native Dropdown Select List </h1>
@@ -142,6 +151,7 @@ For Live `Demo` [(Expo Snack)](https://snack.expo.dev/@danish1658/react-native-d
 | searchicon| JSX Element | Pass any JSX to this prop like Text, Image or Icon to show instead of search icon
 | arrowicon| JSX Element | Pass any JSX to this prop like Text, Image or Icon to show instead of chevron icon
 | closeicon| JSX Element | Pass any JSX to this prop like Text, Image or Icon to show instead of close icon
+| checkicon| JSX Element | Pass any JSX to this prop like Text, Image or Icon to show instead of checkicon
 | searchPlaceholder| String | Custom placeholder text for search TextInput
 | defaultOption| Object | Pass default selected option in key value pair
 | fontFamily| string | Pass font name to apply globally on each text field of component
@@ -253,5 +263,6 @@ const App = () => {
 | badgeStyles| Object| Additional styles for badges of selected values
 | badgeTextStyles| Object| Additional styles for Text of badges of selected values
 | labelStyles| Object| Additional styles for label of multiple select list
+| labelHeadingColor| TextStyle| Change Color of default Label Heading Text Selected  
 
 <br>
