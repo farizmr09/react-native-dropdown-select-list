@@ -2,14 +2,15 @@
 <h3>This is a fork from <b>React Native Dropdown Select List</b> : <a href="https://www.npmjs.com/package/react-native-dropdown-select-list">https://www.npmjs.com/package/react-native-dropdown-select-list</a></h3>
 Fixed Certain Bugs & Enchancing certain features needed therefore this fork and seperate package is made.
 
-What's Fixed & Enchanced in this package :
+### What's Fixed & Enchanced in this package :
 
-  i. Fixed Default option in MultiSelect <br>
-  ii. Added checkicon option as props ( checkicon props ) to change default color or image. <br>
-  iii. Added props ( labelHeadingColor ) to change default color of text selected. <br>
-  iv. added showSelected props ( showSelected = false ) will not show the selected bubbeles on the selection dropdown. This fixes the visibility of select option data as it was shrinking when selecting a large number of data. 
+  i. Fixed Default option in MultiSelect. <br><br>
+  ii. Added checkicon option as props ( checkicon props ) to change default color or image. <br><br>
+  iii. Added props ( labelHeadingColor ) to change default color of text selected. <br><br>
+  iv. Added showSelected props ( showSelected = false ) will not show the selected bubbeles on the selection dropdown. This fixes the   
+      visibility of select option data as it was shrinking when selecting a large number of data.<br> 
 
-defaultOption={[]} i.e array of selected value instead of key value pair.
+use defaultOption={[]} in MultiSelect as array of selected value instead of key value pair ( Object ).
 
 <br>
 <h1 align="center">
