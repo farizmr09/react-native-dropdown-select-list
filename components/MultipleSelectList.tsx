@@ -44,7 +44,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
         checkBoxStyles,
         save = 'key',
         dropdownShown = false,
-        defaultOption,
+        defaultOption = [],
         labelHeadingColor = 'initial',
         showSelected = true,
     }) => {
