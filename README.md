@@ -7,6 +7,7 @@ What's Fixed & Enchanced in this package :
   i. Fixed Default option in MultiSelect <br>
   ii. Added checkicon option as props ( checkicon props ) to change default color or image. <br>
   iii. Added props ( labelHeadingColor ) to change default color of text selected. <br>
+  iv. added showSelected props ( showSelected = false ) will not show the selected bubbeles on the selection dropdown. This fixes the visibility of select option data as it was shrinking when selecting a large number of data. 
 
 defaultOption={[]} i.e array of selected value instead of key value pair.
 
@@ -157,6 +158,7 @@ For Live `Demo` [(Expo Snack)](https://snack.expo.dev/@danish1658/react-native-d
 | fontFamily| string | Pass font name to apply globally on each text field of component
 | notFoundText| string | Pass your custom message if any search result returns empty
 | dropdownShown| boolean | Control your dropdown ( on & off ) state by changing its value to true or false
+| showSelected| boolean | show selected items on the item selection dropdown or not, fixes the visibility bug when selecting large number of data.
 
 <br>
 
