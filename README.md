@@ -7,10 +7,10 @@ Fixed Certain Bugs & Enchancing certain features needed therefore this fork and 
   i. Fixed Default option in MultiSelect. <br><br>
   ii. Added checkicon option as props ( checkicon props ) to change default color or image. <br><br>
   iii. Added props ( labelHeadingColor ) to change default color of text selected. <br><br>
-  iv. Added showSelected props ( showSelected = false ) will not show the selected bubbeles on the selection dropdown. This fixes the   
+  iv. Added showSelected prop ( showSelected = false ) will not show the selected bubbles on the selection dropdown. This fixes the   
       visibility of select option data as it was shrinking when selecting a large number of data.<br> 
 
-use defaultOption={[]} in MultiSelect as array of selected value instead of key value pair ( Object ).
+<b>use defaultOption={[]} in MultiSelect as array of selected value instead of key value pair ( Object )</b>.
 
 <br>
 <h1 align="center">
