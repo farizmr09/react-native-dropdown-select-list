@@ -45,7 +45,8 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
         save = 'key',
         dropdownShown = false,
         defaultOption,
-        labelHeadingColor = 'initial'
+        labelHeadingColor = 'initial',
+        showSelected = true,
     }) => {
 
     const oldOption = React.useRef(null)
@@ -336,7 +337,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                 
                             </ScrollView>
                             
-                                {
+                                {showSelected &&
                                     (selectedval?.length > 0)
                                     ?
                                         <Pressable>

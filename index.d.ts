@@ -263,6 +263,11 @@ export interface MultipleSelectListProps {
    * Set Label Heading color
    */
   labelHeadingColor?: TextStyle;
+
+  /**
+   * Set Label Heading color
+   */
+  showSelected?: boolean;
 }
 
 declare class MultipleSelectList extends React.Component<MultipleSelectListProps> {}
