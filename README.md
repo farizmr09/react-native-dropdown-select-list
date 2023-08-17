@@ -8,7 +8,9 @@ Fixed Certain Bugs & Enchancing certain features needed therefore this fork and 
   ii. Added checkicon option as props ( checkicon props ) to change default color or image. <br><br>
   iii. Added props ( labelHeadingColor ) to change default color of text selected. <br><br>
   iv. Added showSelected prop ( showSelected = false ) will not show the selected bubbles on the selection dropdown. This fixes the   
-      visibility of select option data as it was shrinking when selecting a large number of data.<br> 
+      visibility of select option data as it was shrinking when selecting a large number of data.<br><br>
+  v.  Now Added the function to also <b>Add custom input</b> if that data is not present in the list Using <b>customUserInput prop (   
+      boolean ) </b> for both SingleSelect & MultiSelect Dropdown.      
 
 <b>use defaultOption={[]} in MultiSelect as array of selected value instead of key value pair ( Object )</b>.
 
