@@ -47,6 +47,9 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
         defaultOption = [],
         labelHeadingColor = 'initial',
         showSelected = true,
+        customUserInput = false,
+        setData,
+        setDefaultOption,
     }) => {
 
     const oldOption = React.useRef(null)
@@ -56,7 +59,8 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
     const [height,setHeight] = React.useState<number>(350)
     const animatedvalue = React.useRef(new Animated.Value(0)).current;
     const [filtereddata,setFilteredData] = React.useState(data);
-
+    const [customUserInputData, setCustomUserInputData] = React.useState<any>("")
+    const [counter, setCounter] = React.useState<number>(0);
 
     const slidedown = () => {
         setDropdown(true)
@@ -87,6 +91,26 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
     React.useEffect(() => {
         setFilteredData(data);
       },[data])
+
+    
+    // const setCustom = () => {
+    //     if(customUserInputData.length > 0){
+    //     const unfilteredData = data.map((item: any,index) => ( item.value ));
+    //     console.log('unfilteredData',unfilteredData)
+    //     const customInputData = [customUserInputData].concat(unfilteredData)
+    //     const customInputDataFormatted = customInputData.map((item,index) => ({
+    //         key: index + 1,
+    //         value: item
+    // }))
+    //     console.log(customInputDataFormatted)
+    //     setData(customInputDataFormatted)
+    //     setDefaultOption((prev) => [...prev, customUserInputData])
+    //  }
+    // }
+
+    // React.useEffect(() => { 
+    //     setCustom();
+    //  },[counter])  
 
 
     React.useEffect(() => {
@@ -142,6 +166,9 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                         return row.search(val.toLowerCase()) > -1;
                                     });
                                     setFilteredData(result)
+                                    if(result.length === 0 && customUserInput === true){
+                                        setCustomUserInputData(val)
+                                     }
                                 }}
                                 style={[{padding:0,height:20,flex:1,fontFamily},inputStyles]}
                             />
@@ -322,15 +349,36 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                         }
                                         
                                     })
-                                    :
+                                    : customUserInput === true ? (
+                                        <TouchableOpacity style={[styles.option,dropdownItemStyles]} onPress={ () => {
+                                            const unfilteredData = data.map((item: any,index) => ( item.value ));
+
+                                            const customInputData = [customUserInputData].concat(unfilteredData)
+                                            const customInputDataFormatted = customInputData.map((item,index) => ({
+                                                    key: index + 1,
+                                                    value: item
+                                            }))
+                                            console.log(customInputDataFormatted)
+                                            setData(customInputDataFormatted)
+                                            setDefaultOption((prev) => [...prev, customUserInputData])
+                                            setSelected([...selectedval, customUserInputData])
+                                            setSelectedVal([...selectedval, customUserInputData])
+                                            slideup()
+                                            setTimeout(() => setFilteredData(customInputDataFormatted), 800)
+                                        }}>
+                                            <Text style={[{fontFamily},dropdownTextStyles]}>add "{customUserInputData}"</Text>
+                                        </TouchableOpacity>
+                                    ) : (
                                     <TouchableOpacity style={[styles.option,dropdownItemStyles]} onPress={ () => {
                                         setSelected(undefined)
                                         setSelectedVal("")
                                         slideup()
-                                        setTimeout(() => setFilteredData(data), 800)  
+                                        setTimeout(() => setFilteredData(data), 800)
+                                        
                                     }}>
-                                        <Text style={dropdownTextStyles}>{notFoundText}</Text>
+                                        <Text style={[{fontFamily},dropdownTextStyles]}>{notFoundText}</Text>
                                     </TouchableOpacity>
+                                    )
                                 }
                                 
                                 

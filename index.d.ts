@@ -111,6 +111,11 @@ export interface SelectListProps {
    *  Pass any JSX to this prop like Text, Image or Icon to show instead of close icon
    */
   closeicon?: JSX.Element;
+
+  /**
+   * Custom User Input If not found in list
+   */
+  customUserInput?: boolean;
 }
 
 export interface MultipleSelectListProps {
@@ -268,6 +273,21 @@ export interface MultipleSelectListProps {
    * Set Label Heading color
    */
   showSelected?: boolean;
+
+  /**
+   * Custom User Input If not found in list
+   */
+  customUserInput?: boolean;
+
+  /**
+   * Fn to set Custom Filtered Data
+   */
+  setData: Function;
+
+  /**
+   * Fn to set Custom Default Option
+   */
+  setDefaultOption: Function;
 }
 
 declare class MultipleSelectList extends React.Component<MultipleSelectListProps> {}

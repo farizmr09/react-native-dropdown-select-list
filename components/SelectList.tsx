@@ -36,7 +36,8 @@ const SelectList: React.FC<SelectListProps> =  ({
         onSelect = () => {},
         save = 'key',
         dropdownShown = false,
-        fontFamily
+        fontFamily,
+        customUserInput = false,
     }) => {
 
     const oldOption = React.useRef(null)
@@ -46,6 +47,7 @@ const SelectList: React.FC<SelectListProps> =  ({
     const [height,setHeight] = React.useState<number>(200)
     const animatedvalue = React.useRef(new Animated.Value(0)).current;
     const [filtereddata,setFilteredData] = React.useState(data)
+    const [customUserInputData, setCustomUserInputData] = React.useState<any>("")
 
 
     const slidedown = () => {
@@ -144,6 +146,9 @@ const SelectList: React.FC<SelectListProps> =  ({
                                         return row.search(val.toLowerCase()) > -1;
                                     });
                                     setFilteredData(result)
+                                    if(result.length === 0 && customUserInput === true){
+                                        setCustomUserInputData(val)
+                                     }
                                 }}
                                 style={[{padding:0,height:20,flex:1,fontFamily},inputStyles]}
                             />
@@ -224,7 +229,16 @@ const SelectList: React.FC<SelectListProps> =  ({
                                     }
                                     
                                 })
-                                :
+                                : customUserInput === true ? (
+                                    <TouchableOpacity style={[styles.option,dropdownItemStyles]} onPress={ () => {
+                                        setSelected(customUserInputData)
+                                        setSelectedVal(customUserInputData)
+                                        slideup()
+                                        setTimeout(() => setFilteredData(data), 800)
+                                    }}>
+                                        <Text style={[{fontFamily},dropdownTextStyles]}>add "{customUserInputData}"</Text>
+                                    </TouchableOpacity>
+                                ) : (
                                 <TouchableOpacity style={[styles.option,dropdownItemStyles]} onPress={ () => {
                                     setSelected(undefined)
                                     setSelectedVal("")
@@ -234,6 +248,7 @@ const SelectList: React.FC<SelectListProps> =  ({
                                 }}>
                                     <Text style={[{fontFamily},dropdownTextStyles]}>{notFoundText}</Text>
                                 </TouchableOpacity>
+                                )
                             }
                             
                             
