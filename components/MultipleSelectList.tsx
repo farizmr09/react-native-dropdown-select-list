@@ -363,6 +363,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                             setDefaultOption((prev) => [...prev, customUserInputData])
                                             setSelected([...selectedval, customUserInputData])
                                             setSelectedVal([...selectedval, customUserInputData])
+                                            setCustomUserInputData("");
                                             slideup()
                                             setTimeout(() => setFilteredData(customInputDataFormatted), 800)
                                         }}>
