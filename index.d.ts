@@ -116,6 +116,31 @@ export interface SelectListProps {
    * Custom User Input If not found in list
    */
   customUserInput?: boolean;
+
+  /**
+   * If you want to use api search
+   */
+  isApiSearch?: boolean;
+
+  /**
+   * Have to use with isApiSearch
+   */
+  loader?: boolean;
+
+  /**
+   * Have to use with isApiSearch
+   */
+  loaderSize?: number | string;
+
+  /**
+   * Have to use with isApiSearch
+   */
+  loaderColor?: string;
+
+  /**
+   * Have to use with isApiSearch
+   */
+  setSearchValue?: Function;
 }
 
 export interface MultipleSelectListProps {

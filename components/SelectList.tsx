@@ -8,6 +8,7 @@ import {
     ScrollView,
     Animated,
     TextInput,
+    ActivityIndicator
 } from 'react-native';
 
 import { SelectListProps } from '..';
@@ -38,6 +39,11 @@ const SelectList: React.FC<SelectListProps> =  ({
         dropdownShown = false,
         fontFamily,
         customUserInput = false,
+        isApiSearch = false,
+        loader = false,
+        setSearchValue = () => {},
+        loaderSize,
+        loaderColor
     }) => {
 
     const oldOption = React.useRef(null)
@@ -140,6 +146,9 @@ const SelectList: React.FC<SelectListProps> =  ({
                             <TextInput 
                                 placeholder={searchPlaceholder}
                                 onChangeText={(val) => {
+                                    if(isApiSearch) {
+                                    setSearchValue(val)
+                                    }
                                     let result =  data.filter((item: L1Keys) => {
                                         val.toLowerCase();
                                         let row = item.value.toLowerCase()
@@ -152,7 +161,11 @@ const SelectList: React.FC<SelectListProps> =  ({
                                 }}
                                 style={[{padding:0,height:20,flex:1,fontFamily},inputStyles]}
                             />
-                                <TouchableOpacity onPress={() => slideup()} >
+                                <TouchableOpacity onPress={() => {
+                                    slideup()
+                                    setFilteredData(data)
+                                    isApiSearch ? setSearchValue("") : null 
+                                    }}>
 
                                 {
                                     (!closeicon)
@@ -195,7 +208,18 @@ const SelectList: React.FC<SelectListProps> =  ({
                 ?
                     <Animated.View style={[{maxHeight:animatedvalue},styles.dropdown,dropdownStyles]}>
                         <ScrollView  contentContainerStyle={{paddingVertical:10,overflow:'hidden'}} nestedScrollEnabled={true}>
-
+                            {
+                                (isApiSearch && loader)
+                                ?
+                                <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                                      <ActivityIndicator
+                                        size={loaderSize ? loaderSize : 'large'}
+                                        color={ loaderColor ? loaderColor : "#0EC99E"}
+                                      />
+                                </View>
+                                :
+                                null
+                            }
                             {
                                 (filtereddata.length >=  1)
                                 ?
@@ -238,7 +262,7 @@ const SelectList: React.FC<SelectListProps> =  ({
                                     }}>
                                         <Text style={[{fontFamily},dropdownTextStyles]}>add "{customUserInputData}"</Text>
                                     </TouchableOpacity>
-                                ) : (
+                                ) : (  
                                 <TouchableOpacity style={[styles.option,dropdownItemStyles]} onPress={ () => {
                                     setSelected(undefined)
                                     setSelectedVal("")
