@@ -9,6 +9,7 @@ import {
     Animated,
     TextInput,
     ViewStyle,
+    ActivityIndicator,
     Pressable} from 'react-native';
 
 import { MultipleSelectListProps } from '..';
@@ -50,6 +51,11 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
         customUserInput = false,
         setData,
         setDefaultOption,
+        isApiSearch = false,
+        loader = false,
+        setSearchValue = () => {},
+        loaderSize,
+        loaderColor
     }) => {
 
     const oldOption = React.useRef(null)
@@ -160,6 +166,9 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                             <TextInput 
                                 placeholder={searchPlaceholder}
                                 onChangeText={(val) => {
+                                    if(isApiSearch) {
+                                        setSearchValue(val)
+                                        }
                                     let result =  data.filter((item: L1Keys) => {
                                         val.toLowerCase();
                                         let row = item.value.toLowerCase()
@@ -174,6 +183,8 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                             />
                                 <TouchableOpacity onPress={() => {
                                     slideup()
+                                    setFilteredData(data)
+                                    isApiSearch ? setSearchValue("") : null 
                                     // setTimeout(() => setFilteredData(data), 800)
                                 }} >
                                     {
@@ -238,7 +249,18 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                     <Animated.View style={[{maxHeight:animatedvalue},styles.dropdown, dropdownStyles]}>
                         <View style={[{maxHeight:height}]}>
                             <ScrollView contentContainerStyle={{paddingVertical:10}} nestedScrollEnabled={true}>
-
+                            {
+                                 (isApiSearch && loader)
+                                 ?
+                                 <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                                       <ActivityIndicator
+                                         size={loaderSize ? loaderSize : 'large'}
+                                         color={ loaderColor ? loaderColor : "#0EC99E"}
+                                       />
+                                 </View>
+                                 :
+                                 null
+                            }
                                 {
                                     (filtereddata.length >=  1)
                                     ?
