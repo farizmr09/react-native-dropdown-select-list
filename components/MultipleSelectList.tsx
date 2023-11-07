@@ -33,6 +33,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
         checkicon = false,
         search = true,
         searchPlaceholder = "search",
+        searchPlaceholderColor = "white",
         onSelect = () => {},
         label,
         notFoundText = "No data found",
@@ -165,6 +166,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                             
                             <TextInput 
                                 placeholder={searchPlaceholder}
+                                placeholderTextColor={searchPlaceholderColor}
                                 onChangeText={(val) => {
                                     if(isApiSearch) {
                                         setSearchValue(val)

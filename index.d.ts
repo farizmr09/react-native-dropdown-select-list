@@ -68,9 +68,14 @@ export interface SelectListProps {
   search?: boolean;
 
   /**
-   * set to false if you dont want to use search functionality
+   * additional placeholder for search text input
    */
   searchPlaceholder?: string;
+
+  /**
+   * search placeholder color for search text input
+   */
+  searchPlaceholderColor?: string;
 
   /**
    * Trigger an action when option is selected
@@ -213,6 +218,11 @@ export interface MultipleSelectListProps {
    * set to false if you dont want to use search functionality
    */
   searchPlaceholder?: string;
+
+  /**
+   * search placeholder color for search text input
+   */
+  searchPlaceholderColor?: string;
 
   /**
    * Trigger an action when option is selected
