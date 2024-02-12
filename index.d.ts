@@ -1,357 +1,275 @@
+
 import type * as React from "react";
-import { ViewStyle, TextStyle } from "react-native";
+import { ViewStyle, TextStyle } from 'react-native';
 
-export interface SelectListProps {
-  /**
-   * Fn to set Selected option value which will be stored in your local state
-   */
-  setSelected: Function;
+export interface SelectListProps  {
+    /**
+    * Fn to set Selected option value which will be stored in your local state
+    */
+    setSelected: Function,
 
-  /**
-   * Placeholder text that will be displayed in the select box
-   */
-  placeholder?: string;
+    /**
+    * Placeholder text that will be displayed in the select box
+    */
+    placeholder?: string,
 
-  /**
-   * Additional styles for select box
-   */
-  boxStyles?: ViewStyle;
+    /**
+    * Additional styles for select box
+    */
+    boxStyles?: ViewStyle,
 
-  /**
-   *  	Additional styles for text of select box
-   */
-  inputStyles?: TextStyle;
+    /**
+    *  	Additional styles for text of select box
+    */
+    inputStyles?: TextStyle,
 
-  /**
-   *  	Additional styles for dropdown scrollview
-   */
-  dropdownStyles?: ViewStyle;
+    /**
+    *  	Additional styles for dropdown scrollview
+    */
+    dropdownStyles?:ViewStyle,
 
-  /**
-   *  Additional styles for dropdown list item
-   */
-  dropdownItemStyles?: ViewStyle;
+    /**
+    *  Additional styles for dropdown list item
+    */
+    dropdownItemStyles?: ViewStyle,
 
-  /**
-   * Additional styles for list items text
-   */
-  dropdownTextStyles?: TextStyle;
+    /**
+    * Additional styles for list items text
+    */
+    dropdownTextStyles?: TextStyle,
 
-  /**
-   * Maximum height of the dropdown wrapper to occupy
-   */
-  maxHeight?: number;
+    /**
+    * Maximum height of the dropdown wrapper to occupy
+    */
+    maxHeight?: number,
 
-  /**
-   * Data which will be iterated as options of select list
-   */
-  data: Array<{}>;
+    /**
+    * Data which will be iterated as options of select list
+    */
+    data: Array<{}>,
 
-  /**
-   * The default option of the select list
-   */
-  defaultOption?: { key: any; value: any };
+    /**
+    * The default option of the select list
+    */
+    defaultOption?: { key: any, value: any },
 
-  /**
-   * Pass any JSX to this prop like Text, Image or Icon to show instead of search icon
-   */
-  searchicon?: JSX.Element;
+    /**
+    * Pass any JSX to this prop like Text, Image or Icon to show instead of search icon
+    */
+    searchicon?: JSX.Element,
 
-  /**
-   *  Pass any JSX to this prop like Text, Image or Icon to show instead of chevron icon
-   */
-  arrowicon?: JSX.Element;
+    /**
+    *  Pass any JSX to this prop like Text, Image or Icon to show instead of chevron icon
+    */
+    arrowicon?: JSX.Element,
 
-  /**
-   * set to false if you dont want to use search functionality
-   */
-  search?: boolean;
+    /**
+    * set to false if you dont want to use search functionality
+    */
+    search?: boolean,
 
-  /**
-   * additional placeholder for search text input
-   */
-  searchPlaceholder?: string;
+    /**
+    * set to false if you dont want to use search functionality
+    */
+    searchPlaceholder?: string,
 
-  /**
-   * search placeholder color for search text input
-   */
-  searchPlaceholderColor?: string;
+    /**
+    * Trigger an action when option is selected
+    */
+    onSelect?: () => void,
 
-  /**
-   * Trigger an action when option is selected
-   */
-  onSelect?: () => void;
+    /**
+    * set fontFamily of whole component Text 
+    */
+    fontFamily?: string,
 
-  /**
-   * set fontFamily of whole component Text
-   */
-  fontFamily?: string;
+    /**
+    * set this to change the default search failure text
+    */
+    notFoundText?: string,
 
-  /**
-   * set this to change the default search failure text
-   */
-  notFoundText?: string;
+    /**
+    * Additional styles for disabled list item
+    */
+    disabledItemStyles?: ViewStyle,
 
-  /**
-   * Additional styles for disabled list item
-   */
-  disabledItemStyles?: ViewStyle;
+    /**
+    * Additional styles for disabled list items text
+    */
+    disabledTextStyles?: TextStyle,
 
-  /**
-   * Additional styles for disabled list items text
-   */
-  disabledTextStyles?: TextStyle;
+    /**
+    * What to store inside your local state (key or value)
+    */
+    save?: 'key' | 'value',
 
-  /**
-   * What to store inside your local state (key or value)
-   */
-  save?: "key" | "value";
+    /**
+    * Control the dropdown with this prop
+    */
+    dropdownShown?: boolean,
 
-  /**
-   * Control the dropdown with this prop
-   */
-  dropdownShown?: boolean;
-
-  /**
-   *  Pass any JSX to this prop like Text, Image or Icon to show instead of close icon
-   */
-  closeicon?: JSX.Element;
-
-  /**
-   * Custom User Input If not found in list
-   */
-  customUserInput?: boolean;
-
-  /**
-   * If you want to use api search
-   */
-  isApiSearch?: boolean;
-
-  /**
-   * Have to use with isApiSearch
-   */
-  loader?: boolean;
-
-  /**
-   * Have to use with isApiSearch
-   */
-  loaderSize?: number | string;
-
-  /**
-   * Have to use with isApiSearch
-   */
-  loaderColor?: string;
-
-  /**
-   * Have to use with isApiSearch
-   */
-  setSearchValue?: Function;
+    /**
+    *  Pass any JSX to this prop like Text, Image or Icon to show instead of close icon
+    */
+    closeicon?: JSX.Element,
 }
 
-export interface MultipleSelectListProps {
-  /**
-   * Fn to set Selected option value which will be stored in your local state
-   */
-  setSelected: Function;
 
-  /**
-   * Placeholder text that will be displayed in the select box
-   */
-  placeholder?: string;
+export interface MultipleSelectListProps  {
+    showSelected?: boolean,
+    /**
+    * Fn to set Selected option value which will be stored in your local state
+    */
+    setSelected: Function,
 
-  /**
-   * Additional styles for select box
-   */
-  boxStyles?: ViewStyle;
+    /**
+    * Placeholder text that will be displayed in the select box
+    */
+    placeholder?: string,
 
-  /**
-   *  	Additional styles for text of select box
-   */
-  inputStyles?: TextStyle;
+    /**
+    * Additional styles for select box
+    */
+    boxStyles?: ViewStyle,
 
-  /**
-   *  	Additional styles for dropdown scrollview
-   */
-  dropdownStyles?: ViewStyle;
+    /**
+    *  	Additional styles for text of select box
+    */
+    inputStyles?: TextStyle,
 
-  /**
-   *  Additional styles for dropdown list item
-   */
-  dropdownItemStyles?: ViewStyle;
+    /**
+    *  	Additional styles for text of select box
+    */
+    placeholderStyles?: TextStyle,
 
-  /**
-   * Additional styles for list items text
-   */
-  dropdownTextStyles?: TextStyle;
+    /**
+    *  	Additional styles for dropdown scrollview 
+    */
+    dropdownStyles?:ViewStyle,
 
-  /**
-   * Maximum height of the dropdown wrapper to occupy
-   */
-  maxHeight?: number;
+    /**
+    *  Additional styles for dropdown list item
+    */
+    dropdownItemStyles?: ViewStyle,
 
-  /**
-   * Data which will be iterated as options of select list
-   */
-  data: Array<{}>;
+    /**
+    * Additional styles for list items text
+    */
+    dropdownTextStyles?: TextStyle,
 
-  /**
-   * The default option of the select list
-   */
-  defaultOption?: [];
+    /**
+    * Maximum height of the dropdown wrapper to occupy
+    */
+    maxHeight?: number,
 
-  /**
-   * Pass any JSX to this prop like Text, Image or Icon to show instead of search icon
-   */
-  searchicon?: JSX.Element;
+    /**
+    * Data which will be iterated as options of select list
+    */
+    data: Array<{}>,
 
-  /**
-   *  Pass any JSX to this prop like Text, Image or Icon to show instead of chevron icon
-   */
-  arrowicon?: JSX.Element;
+    /**
+    * The default option of the select list
+    */
+    defaultOption?: { key: any, value: any },
 
-  /**
-   * set to false if you dont want to use search functionality
-   */
-  search?: boolean;
+    /**
+    * Pass any JSX to this prop like Text, Image or Icon to show instead of search icon
+    */
+    searchicon?: JSX.Element,
 
-  /**
-   * set to false if you dont want to use search functionality
-   */
-  searchPlaceholder?: string;
+    /**
+    *  Pass any JSX to this prop like Text, Image or Icon to show instead of chevron icon
+    */
+    arrowicon?: JSX.Element,
 
-  /**
-   * search placeholder color for search text input
-   */
-  searchPlaceholderColor?: string;
+    /**
+    * set to false if you dont want to use search functionality
+    */
+    search?: boolean,
 
-  /**
-   * Trigger an action when option is selected
-   */
-  onSelect?: () => void;
+    /**
+    * set to false if you dont want to use search functionality
+    */
+     searchPlaceholder?: string,
 
-  /**
-   * set text of label which appears soon after multiple values are selected
-   */
-  label?: string;
+    /**
+    * Trigger an action when option is selected
+    */
+    onSelect?: () => void,
 
-  /**
-   * set fontFamily of whole component Text
-   */
-  fontFamily?: string;
+    /**
+    * set text of label which appears soon after multiple values are selected
+    */
+    label?: string,
 
-  /**
-   * set this to change the default search failure text
-   */
-  notFoundText?: string;
+    /**
+    * set fontFamily of whole component Text 
+    */
+    fontFamily?: string,
 
-  /**
-   * Additional styles for disabled list item
-   */
-  disabledItemStyles?: ViewStyle;
+    /**
+    * set this to change the default search failure text
+    */
+    notFoundText?: string,
 
-  /**
-   * Additional styles for disabled list items text
-   */
-  disabledTextStyles?: TextStyle;
+    /**
+    * Additional styles for disabled list item
+    */
+    disabledItemStyles?: ViewStyle,
 
-  /**
-   * Additional styles for disabled checkbox
-   */
-  disabledCheckBoxStyles?: ViewStyle;
+    /**
+    * Additional styles for disabled list items text
+    */
+    disabledTextStyles?: TextStyle,
 
-  /**
-   * Additional styles for checkbox
-   */
-  checkBoxStyles?: ViewStyle;
 
-  /**
-   * What to store inside your local state (key or value)
-   */
-  save?: "key" | "value";
+    /**
+    * Additional styles for disabled checkbox
+    */
+    disabledCheckBoxStyles?: ViewStyle,
 
-  /**
-   * Control the dropdown with this prop
-   */
-  dropdownShown?: boolean;
+    /**
+    * Additional styles for checkbox
+    */
+    checkBoxStyles?: ViewStyle,
 
-  /**
-   *  Pass any JSX to this prop like Text, Image or Icon to show instead of close icon
-   */
-  closeicon?: JSX.Element;
+    /**
+    * What to store inside your local state (key or value)
+    */
+    save?: 'key' | 'value',
+    
+    /**
+    * Control the dropdown with this prop
+    */
+    dropdownShown?: boolean,
 
-  /**
-   *  Pass any JSX to this prop like Text, Image or Icon to show instead of check icon
-   */
-  checkicon?: JSX.Element;
+    /**
+    *  Pass any JSX to this prop like Text, Image or Icon to show instead of close icon
+    */
+    closeicon?: JSX.Element,
 
-  /**
-   * Additional styles for multiselect badge
-   */
-  badgeStyles?: ViewStyle;
+    
+    /**
+    * Additional styles for multiselect badge
+    */
+    badgeStyles?: ViewStyle,
 
-  /**
-   * Additional styles for multiselect badge text
-   */
-  badgeTextStyles?: ViewStyle;
+    /**
+    * Additional styles for multiselect badge text
+    */
+    badgeTextStyles?: TextStyle,
 
-  /**
-   * Additional styles for label
-   */
-  labelStyles?: TextStyle;
-
-  /**
-   * Set Label Heading color
-   */
-  labelHeadingColor?: TextStyle;
-
-  /**
-   * Set Label Heading color
-   */
-  showSelected?: boolean;
-
-  /**
-   * Custom User Input If not found in list
-   */
-  customUserInput?: boolean;
-
-  /**
-   * Fn to set Custom Filtered Data
-   */
-  setData: Function;
-
-  /**
-   * Fn to set Custom Default Option
-   */
-  setDefaultOption: Function;
-
-  /**
-   * If you want to use api search
-   */
-  isApiSearch?: boolean;
-
-  /**
-   * Have to use with isApiSearch
-   */
-  loader?: boolean;
-
-  /**
-   * Have to use with isApiSearch
-   */
-  loaderSize?: number | string;
-
-  /**
-   * Have to use with isApiSearch
-   */
-  loaderColor?: string;
-
-  /**
-   * Have to use with isApiSearch
-   */
-  setSearchValue?: Function;
+    /**
+    * Additional styles for label
+    */
+    labelStyles?: TextStyle,
 }
 
 declare class MultipleSelectList extends React.Component<MultipleSelectListProps> {}
 
 declare class SelectList extends React.Component<SelectListProps> {}
 
-export { MultipleSelectList, SelectList };
+export {
+    MultipleSelectList,
+    SelectList
+};

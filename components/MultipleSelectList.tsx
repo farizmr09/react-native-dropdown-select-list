@@ -17,11 +17,13 @@ import { MultipleSelectListProps } from '..';
 type L1Keys = { key?: any; value?: any; disabled?: boolean | undefined }
 
 const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
+        showSelected = true,
         fontFamily,
         setSelected,
         placeholder,
         boxStyles,
         inputStyles,
+        placeholderStyles,
         dropdownStyles,
         dropdownItemStyles,
         dropdownTextStyles,
@@ -229,7 +231,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                     </TouchableOpacity>
                 :
                     <TouchableOpacity style={[styles.wrapper,boxStyles]} onPress={() => { if(!dropdown){ slidedown() }else{ slideup() } }}>
-                        <Text style={[{fontFamily},inputStyles]}>{ (selectedval == "") ? (placeholder) ? placeholder : 'Select option' : selectedval  }</Text>
+                        <Text style={[{fontFamily},placeholderStyles]}>{ (selectedval == "") ? (placeholder) ? placeholder : 'Select option' : selectedval  }</Text>
                         {
                             (!arrowicon)
                             ?
@@ -410,7 +412,9 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                 
                             </ScrollView>
                             
+
                                 {showSelected &&
+
                                     (selectedval?.length > 0)
                                     ?
                                         <Pressable>
