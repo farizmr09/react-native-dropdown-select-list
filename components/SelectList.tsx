@@ -8,6 +8,7 @@ import {
     ScrollView,
     Animated,
     TextInput,
+    ActivityIndicator
 } from 'react-native';
 
 import { SelectListProps } from '..';
@@ -30,13 +31,20 @@ const SelectList: React.FC<SelectListProps> =  ({
         closeicon = false,
         search = true,
         searchPlaceholder = "search",
+        searchPlaceholderColor = "white",
         notFoundText = "No data found",
         disabledItemStyles,
         disabledTextStyles,
         onSelect = () => {},
         save = 'key',
         dropdownShown = false,
-        fontFamily
+        fontFamily,
+        customUserInput = false,
+        isApiSearch = false,
+        loader = false,
+        setSearchValue = () => {},
+        loaderSize,
+        loaderColor
     }) => {
 
     const oldOption = React.useRef(null)
@@ -46,6 +54,7 @@ const SelectList: React.FC<SelectListProps> =  ({
     const [height,setHeight] = React.useState<number>(200)
     const animatedvalue = React.useRef(new Animated.Value(0)).current;
     const [filtereddata,setFilteredData] = React.useState(data)
+    const [customUserInputData, setCustomUserInputData] = React.useState<any>("")
 
 
     const slidedown = () => {
@@ -137,17 +146,28 @@ const SelectList: React.FC<SelectListProps> =  ({
                             
                             <TextInput 
                                 placeholder={searchPlaceholder}
+                                placeholderTextColor={searchPlaceholderColor}
                                 onChangeText={(val) => {
+                                    if(isApiSearch) {
+                                    setSearchValue(val)
+                                    }
                                     let result =  data.filter((item: L1Keys) => {
                                         val.toLowerCase();
                                         let row = item.value.toLowerCase()
                                         return row.search(val.toLowerCase()) > -1;
                                     });
                                     setFilteredData(result)
+                                    if(result.length === 0 && customUserInput === true){
+                                        setCustomUserInputData(val)
+                                     }
                                 }}
                                 style={[{padding:0,height:20,flex:1,fontFamily},inputStyles]}
                             />
-                                <TouchableOpacity onPress={() => slideup()} >
+                                <TouchableOpacity onPress={() => {
+                                    slideup()
+                                    setFilteredData(data)
+                                    isApiSearch ? setSearchValue("") : null 
+                                    }}>
 
                                 {
                                     (!closeicon)
@@ -190,7 +210,18 @@ const SelectList: React.FC<SelectListProps> =  ({
                 ?
                     <Animated.View style={[{maxHeight:animatedvalue},styles.dropdown,dropdownStyles]}>
                         <ScrollView  contentContainerStyle={{paddingVertical:10,overflow:'hidden'}} nestedScrollEnabled={true}>
-
+                            {
+                                (isApiSearch && loader)
+                                ?
+                                <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                                      <ActivityIndicator
+                                        size={loaderSize ? loaderSize : 'large'}
+                                        color={ loaderColor ? loaderColor : "#0EC99E"}
+                                      />
+                                </View>
+                                :
+                                null
+                            }
                             {
                                 (filtereddata.length >=  1)
                                 ?
@@ -224,7 +255,16 @@ const SelectList: React.FC<SelectListProps> =  ({
                                     }
                                     
                                 })
-                                :
+                                : customUserInput === true ? (
+                                    <TouchableOpacity style={[styles.option,dropdownItemStyles]} onPress={ () => {
+                                        setSelected(customUserInputData)
+                                        setSelectedVal(customUserInputData)
+                                        slideup()
+                                        setTimeout(() => setFilteredData(data), 800)
+                                    }}>
+                                        <Text style={[{fontFamily},dropdownTextStyles]}>add "{customUserInputData}"</Text>
+                                    </TouchableOpacity>
+                                ) : (  
                                 <TouchableOpacity style={[styles.option,dropdownItemStyles]} onPress={ () => {
                                     setSelected(undefined)
                                     setSelectedVal("")
@@ -234,6 +274,7 @@ const SelectList: React.FC<SelectListProps> =  ({
                                 }}>
                                     <Text style={[{fontFamily},dropdownTextStyles]}>{notFoundText}</Text>
                                 </TouchableOpacity>
+                                )
                             }
                             
                             

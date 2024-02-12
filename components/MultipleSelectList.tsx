@@ -9,6 +9,7 @@ import {
     Animated,
     TextInput,
     ViewStyle,
+    ActivityIndicator,
     Pressable} from 'react-native';
 
 import { MultipleSelectListProps } from '..';
@@ -31,8 +32,10 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
         searchicon = false,
         arrowicon = false,
         closeicon = false,
+        checkicon = false,
         search = true,
         searchPlaceholder = "search",
+        searchPlaceholderColor = "white",
         onSelect = () => {},
         label,
         notFoundText = "No data found",
@@ -45,7 +48,17 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
         checkBoxStyles,
         save = 'key',
         dropdownShown = false,
-        defaultOption
+        defaultOption = [],
+        labelHeadingColor = 'initial',
+        showSelected = true,
+        customUserInput = false,
+        setData,
+        setDefaultOption,
+        isApiSearch = false,
+        loader = false,
+        setSearchValue = () => {},
+        loaderSize,
+        loaderColor
     }) => {
 
     const oldOption = React.useRef(null)
@@ -55,7 +68,8 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
     const [height,setHeight] = React.useState<number>(350)
     const animatedvalue = React.useRef(new Animated.Value(0)).current;
     const [filtereddata,setFilteredData] = React.useState(data);
-
+    const [customUserInputData, setCustomUserInputData] = React.useState<any>("")
+    const [counter, setCounter] = React.useState<number>(0);
 
     const slidedown = () => {
         setDropdown(true)
@@ -86,6 +100,26 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
     React.useEffect(() => {
         setFilteredData(data);
       },[data])
+
+    
+    // const setCustom = () => {
+    //     if(customUserInputData.length > 0){
+    //     const unfilteredData = data.map((item: any,index) => ( item.value ));
+    //     console.log('unfilteredData',unfilteredData)
+    //     const customInputData = [customUserInputData].concat(unfilteredData)
+    //     const customInputDataFormatted = customInputData.map((item,index) => ({
+    //         key: index + 1,
+    //         value: item
+    // }))
+    //     console.log(customInputDataFormatted)
+    //     setData(customInputDataFormatted)
+    //     setDefaultOption((prev) => [...prev, customUserInputData])
+    //  }
+    // }
+
+    // React.useEffect(() => { 
+    //     setCustom();
+    //  },[counter])  
 
 
     React.useEffect(() => {
@@ -134,18 +168,27 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                             
                             <TextInput 
                                 placeholder={searchPlaceholder}
+                                placeholderTextColor={searchPlaceholderColor}
                                 onChangeText={(val) => {
+                                    if(isApiSearch) {
+                                        setSearchValue(val)
+                                        }
                                     let result =  data.filter((item: L1Keys) => {
                                         val.toLowerCase();
                                         let row = item.value.toLowerCase()
                                         return row.search(val.toLowerCase()) > -1;
                                     });
                                     setFilteredData(result)
+                                    if(result.length === 0 && customUserInput === true){
+                                        setCustomUserInputData(val)
+                                     }
                                 }}
                                 style={[{padding:0,height:20,flex:1,fontFamily},inputStyles]}
                             />
                                 <TouchableOpacity onPress={() => {
                                     slideup()
+                                    setFilteredData(data)
+                                    isApiSearch ? setSearchValue("") : null 
                                     // setTimeout(() => setFilteredData(data), 800)
                                 }} >
                                     {
@@ -210,7 +253,18 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                     <Animated.View style={[{maxHeight:animatedvalue},styles.dropdown, dropdownStyles]}>
                         <View style={[{maxHeight:height}]}>
                             <ScrollView contentContainerStyle={{paddingVertical:10}} nestedScrollEnabled={true}>
-
+                            {
+                                 (isApiSearch && loader)
+                                 ?
+                                 <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                                       <ActivityIndicator
+                                         size={loaderSize ? loaderSize : 'large'}
+                                         color={ loaderColor ? loaderColor : "#0EC99E"}
+                                       />
+                                 </View>
+                                 :
+                                 null
+                            }
                                 {
                                     (filtereddata.length >=  1)
                                     ?
@@ -226,14 +280,15 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                                         {
                                                             (selectedval?.includes(value))
                                                             ?
-                                                                
+                                                                (!checkicon) 
+                                                                ?
                                                                 <Image 
                                                                     key={index}
                                                                     source={require('../assets/images/check.png')}
                                                                     resizeMode='contain'
                                                                     style={[{width:8,height:8,paddingLeft:7}]}
                                                                 />
-                                                
+                                                                : checkicon
                                                             :
                                                             null
 
@@ -296,14 +351,15 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                                         {
                                                             (selectedval?.includes(value))
                                                             ?
-                                                                
+                                                                (!checkicon) 
+                                                                ?
                                                                 <Image 
                                                                     key={index}
                                                                     source={require('../assets/images/check.png')}
                                                                     resizeMode='contain'
                                                                     style={{width:8,height:8,paddingLeft:7}}
                                                                 />
-                                                
+                                                                : checkicon
                                                             :
                                                             null
 
@@ -319,27 +375,51 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                         }
                                         
                                     })
-                                    :
+                                    : customUserInput === true ? (
+                                        <TouchableOpacity style={[styles.option,dropdownItemStyles]} onPress={ () => {
+                                            const unfilteredData = data.map((item: any,index) => ( item.value ));
+
+                                            const customInputData = [customUserInputData].concat(unfilteredData)
+                                            const customInputDataFormatted = customInputData.map((item,index) => ({
+                                                    key: index + 1,
+                                                    value: item
+                                            }))
+                                            console.log(customInputDataFormatted)
+                                            setData(customInputDataFormatted)
+                                            setDefaultOption((prev) => [...prev, customUserInputData])
+                                            setSelected([...selectedval, customUserInputData])
+                                            setSelectedVal([...selectedval, customUserInputData])
+                                            setCustomUserInputData("");
+                                            slideup()
+                                            setTimeout(() => setFilteredData(customInputDataFormatted), 800)
+                                        }}>
+                                            <Text style={[{fontFamily},dropdownTextStyles]}>add "{customUserInputData}"</Text>
+                                        </TouchableOpacity>
+                                    ) : (
                                     <TouchableOpacity style={[styles.option,dropdownItemStyles]} onPress={ () => {
                                         setSelected(undefined)
                                         setSelectedVal("")
                                         slideup()
-                                        setTimeout(() => setFilteredData(data), 800)  
+                                        setTimeout(() => setFilteredData(data), 800)
+                                        
                                     }}>
-                                        <Text style={dropdownTextStyles}>{notFoundText}</Text>
+                                        <Text style={[{fontFamily},dropdownTextStyles]}>{notFoundText}</Text>
                                     </TouchableOpacity>
+                                    )
                                 }
                                 
                                 
                                 
                             </ScrollView>
                             
-                                {showSelected &&   
+
+                                {showSelected &&
+
                                     (selectedval?.length > 0)
                                     ?
                                         <Pressable>
                                             <View style={{flexDirection:'row', justifyContent:'space-between',alignItems:'center',paddingLeft:20}}>
-                                                <Text style={{marginRight:20,fontWeight:'600',fontFamily}}>Selected</Text>
+                                                <Text style={{marginRight:20,fontWeight:'600',fontFamily, color: labelHeadingColor }}>Selected</Text>
                                                 <View style={{height: 1, flex: 1, backgroundColor: 'gray'}} />
                                             </View>
                                             <View style={{flexDirection:'row',paddingHorizontal:20,marginBottom:20,flexWrap:'wrap'}}>
